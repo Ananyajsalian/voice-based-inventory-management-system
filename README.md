@@ -25,25 +25,58 @@ Traditional inventory systems fail for small retailers in Karnataka due to langu
 
 ### 🔑 Key Engineering Decisions 
 
-**1. Whisper Accuracy Optimization:**
+
+### Key Engineering Decisions
+
+**1. Whisper Accuracy Optimization - 90%+ Accuracy:**
 ```python
-# Critical for 90%+ - without this, accuracy was 67%
-model.transcribe(audio, initial_prompt="akki, bele, tuppa, rice, dal", language="en")
-inventorySchema.index({ name: 1, userId: 1 }); // <100ms queries
-3. JWT Security:
-All inventory routes protected with authenticateToken middleware for multi-tenant isolation.
-🚀 DeploymentContainerized: Dockerfile with node:18-alpine for GCP Cloud RunCloud: Ready for Render, Vercel, GCP - 99.9% uptime targetCI/CD: GitHub commits follow Conventional Commits (feat:, chore:)🛠️ Tech StackBackend: Node.js, Express.js, JWT Authentication
+# Critical for accuracy - without this, accuracy was 67%
+# With initial_prompt, accuracy 90%+
+
+import whisper
+model = whisper.load_model("base")
+INITIAL_PROMPT = "akki, bele, tuppa, rice, dal, sugar, oil, inventory"
+
+def transcribe_audio(audio_path):
+    result = model.transcribe(
+        audio_path,
+        initial_prompt=INITIAL_PROMPT,
+        language="en",
+        fp16=False
+    )
+    return result["text"].strip().lower()
+
+2. Database Optimization for 10k+ Records:
+const inventorySchema = new mongoose.Schema({
+  name: { type: String, required: true, index: true },
+  quantity: { type: Number, required: true },
+  userId: { type: String, required: true, index: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+// Compound index for <100ms queries
+inventorySchema.index({ name: 1, userId: 1 });
+
+3. JWT Security for Multi-User Isolation:
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
+
+4. Cloud Deployment:
+1)Containerized: Dockerfile with node:18-alpine
+2)Cloud: Ready for Render, Vercel, GCP Cloud Run
+3)Uptime: 99.9% target
+
+Tech StackBackend:
+ Node.js, Express.js, JWT Authentication
 AI: OpenAI Whisper (base model), Python
 Database: MongoDB Atlas, Mongoose ODM
-Cloud: Docker, GCP Cloud Run, Render, Vercel
-Tools: Git, REST APIs, Postman
-
-⚡ Quick Start
-git clone https://github.com/Ananyajsalian/voice-based-inventory-management-system.git
-cd voice-based-inventory-management-system
-npm install
-pip install openai-whisper
-npm start # Server runs on port 3000
-
-👩‍💻 Author
-Ananya J Salian - B.E. CSE|AJIET
+Cloud: Docker, GCP Cloud Run, Render, VercelTools: Git, REST APIs, Postman
