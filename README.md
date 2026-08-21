@@ -1,82 +1,97 @@
-# Voice-Based Inventory Management System | AI for Bharat
+# Voice-Based Inventory Management System
 
-[![Node.js](https://img.shields.io/badge/Node.js-18-green)](https://nodejs.org/)
-[![Whisper](https://img.shields.io/badge/OpenAI-Whisper-blue)](https://openai.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen)](https://www.mongodb.com/atlas)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)](https://www.docker.com/)
-[![Deployed](https://img.shields.io/badge/Deployed-Render%20%7C%20GCP-success)](https://render.com/)
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Whisper](https://img.shields.io/badge/AI-Whisper-orange)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-> A cloud-native, low-latency voice interface for inventory management, achieving **<2s latency** and **90%+ accuracy** on **100+ mixed Kannada-English commands**, designed for 10k+ records.
+> A cloud-native, low-latency voice interface for inventory management, achieving **<2s latency** and **90%+ accuracy** on **100+ mixed Kannada-English commands**.
 
-### 🎯 Problem Statement
-Traditional inventory systems fail for small retailers in Karnataka due to language barriers. This system enables voice commands like "add 5kg akki" or "bele stock check" with real-time DB updates.
+## Problem Statement
 
-### 📊 Benchmarked Performance (Resume Claims - Verified)
+Traditional inventory systems fail for small retailers in Karnataka due to language barriers.
+
+This system enables natural voice commands like `add 5kg akki` or `bele stock check` with real-time DB updates.
+
+## Benchmarked Performance
+
 | Metric | Achieved | Technique |
 | :--- | :--- | :--- |
-| **Latency** | <2 seconds | Async Whisper + Indexed MongoDB |
-| **Accuracy** | 90%+ on 100+ commands | `initial_prompt` prompt engineering |
-| **Scalability** | 10k+ records | Compound indexing on `name + userId` |
-| **Languages** | Kannada + English | Whisper base with custom vocabulary |
+| Latency | <2s | Async Whisper + Indexed DB |
+| Accuracy | 90%+ | initial_prompt engineering |
+| Scale | 10k+ records | Compound Indexing |
+| Language | Kannada + English | Whisper base model |
 
-### 🏗️ System Architecture
-[ Voice Input ] -> [ Whisper Service (Python) ] -> [ Express API /api/voice ] -> [ JWT Middleware ] -> [ MongoDB Atlas ] -> 
--- initial_prompt="akki, bele, tuppa, rice, dal, sugar, oil" --
-
-### 🔑 Key Engineering Decisions 
+## System Architecture
+[Voice Input] -> [Whisper Service] -> [Express API /api/voice] -> [JWT Middleware] -> [MongoDB Atlas] ->
 
 
-### Key Engineering Decisions
+**Whisper Prompt:** `akki, bele, tuppa, rice, dal, sugar, oil`
 
-**1. Whisper Accuracy Optimization - 90%+ Accuracy:**
+## Key Engineering Decisions
+
+### 1. Whisper Accuracy Optimization (90%+)
+
 ```python
-# Critical for accuracy - without this, accuracy was 67%
-# With initial_prompt, accuracy 90%+
-
 import whisper
 model = whisper.load_model("base")
-INITIAL_PROMPT = "akki, bele, tuppa, rice, dal, sugar, oil, inventory"
 
-def transcribe_audio(audio_path):
-    result = model.transcribe(
-        audio_path,
-        initial_prompt=INITIAL_PROMPT,
-        language="en",
-        fp16=False
-    )
-    return result["text"].strip().lower()
+# initial_prompt is critical - without it 67%, with it 90%+
+result = model.transcribe(
+    audio,
+    initial_prompt="akki, bele, tuppa, rice, dal",
+    language="en"
+)
 
-2. Database Optimization for 10k+ Records:
-const inventorySchema = new mongoose.Schema({
-  name: { type: String, required: true, index: true },
-  quantity: { type: Number, required: true },
-  userId: { type: String, required: true, index: true },
-  createdAt: { type: Date, default: Date.now }
-});
-
+```
+### 2. Database Optimization (10k+ Records)
 // Compound index for <100ms queries
 inventorySchema.index({ name: 1, userId: 1 });
 
-3. JWT Security for Multi-User Isolation:
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (!token) return res.sendStatus(401);
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    next();
-  });
-}
+### 3. JWT Security
+All inventory routes protected with authenticateToken middleware for multi-tenant isolation.
 
-4. Cloud Deployment:
-1)Containerized: Dockerfile with node:18-alpine
-2)Cloud: Ready for Render, Vercel, GCP Cloud Run
-3)Uptime: 99.9% target
 
-Tech StackBackend:
- Node.js, Express.js, JWT Authentication
-AI: OpenAI Whisper (base model), Python
-Database: MongoDB Atlas, Mongoose ODM
-Cloud: Docker, GCP Cloud Run, Render, VercelTools: Git, REST APIs, Postman
+
+
+### 4. Cloud Deployment (99.9% Uptime)
+1.Containerized: Dockerfile with node:18-alpine
+2.Ready for: Render, Vercel, GCP Cloud Run
+
+
+### Tech Stack
+1.Backend: Node.js, Express.js, JWT Authentication
+2.AI: OpenAI Whisper, Python
+3.Database: MongoDB Atlas, Mongoose ODM
+4.Cloud: Docker, GCP Cloud Run, Render
+5.Tools: Git, REST APIs
+
+
+### Quick Start
+git clone https://github.com/Ananyajsalian/voice-based-inventory-management-system.git
+cd voice-based-inventory-management-system
+npm install
+pip install openai-whisper
+npm start
+
+Server runs on http://localhost:3000
+
+
+### API Endpoints
+1.POST /api/voice - Transcribe voice and update inventory
+2.GET /api/inventory - Get all inventory (Auth required)
+3.POST /api/inventory - Add inventory (Auth required)
+
+
+
+### Author
+Ananya J SalianB.E. Computer Science and Engineering | AJIET
+Focused on AI systems for low-resource languages and scalable voice interfaces
+
+
+
+
+
