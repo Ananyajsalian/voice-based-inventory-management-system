@@ -85,6 +85,11 @@ Server runs on http://localhost:3000
 3.POST /api/inventory - Add inventory (Auth required)
 
 
+###
+![Live Demo](QR.png) [Watch Live Demo Video]
+https://drive.google.com/file/d/13_LDdAga3WrNHpsIcMRHm_lerzGOpfeA/view?usp=sharing
+
+
 
 ### Author
 Ananya J SalianB.E. Computer Science and Engineering | AJIET
