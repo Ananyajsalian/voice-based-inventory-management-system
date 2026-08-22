@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://user:pass@cluster0.mongodb.net/voice_inventory";
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://user:pass@cluster0.mqezote.mongodb.net/voice_inventory";
 mongoose.connect(MONGO_URI)
  .then(() => console.log("MongoDB Atlas Connected - 10k+ ready"))
  .catch(err => console.error(err));
