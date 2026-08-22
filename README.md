@@ -1,10 +1,11 @@
 # Voice-Based Inventory Management System
 
-![Python 3.10](https://img.shields.io/badge/Python-3.10-blue?logo=python)
-![Node.js](https://img.shields.io/badge/Node.js-20.x-green?logo=node.js)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
-![Whisper](https://img.shields.io/badge/Whisper-OpenAI-black)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
+[![Python 3.10](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/atlas)
+[![Whisper](https://img.shields.io/badge/Whisper-OpenAI-000000?logo=openai&logoColor=white)](https://github.com/openai/whisper)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com/)
 > A cloud-native, low-latency voice interface for inventory management, achieving **<2s latency** and **90%+ accuracy** on **100+ mixed Kannada-English commands**.
 
 ## Problem Statement
