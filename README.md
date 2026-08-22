@@ -8,6 +8,11 @@
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com/)
 > A cloud-native, low-latency voice interface for inventory management, achieving **<2s latency** and **90%+ accuracy** on **100+ mixed Kannada-English commands**.
 
+
+🚀 Voice Inventory - Handles 10,000+ items with <150ms search
+Tech: Node.js, MongoDB Atlas, Indexed Search
+Performance: 10k items seeded, search_10k: 113.389ms
+
 ## Problem Statement
 
 Traditional inventory systems fail for small retailers in Karnataka due to language barriers.
