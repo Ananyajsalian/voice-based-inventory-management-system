@@ -1,12 +1,10 @@
 # Voice-Based Inventory Management System
 
-![Node.js](https://img.shields.io/badge/Node.js-18.x-green)
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Whisper](https://img.shields.io/badge/AI-Whisper-orange)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
+![Python 3.10](https://img.shields.io/badge/Python-3.10-blue?logo=python)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-green?logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
+![Whisper](https://img.shields.io/badge/Whisper-OpenAI-black)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
 > A cloud-native, low-latency voice interface for inventory management, achieving **<2s latency** and **90%+ accuracy** on **100+ mixed Kannada-English commands**.
 
 ## Problem Statement
